@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    paths:
+      - 'index.html'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.5
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy index.html to CentOS7 Machine
+        run: |
+          # Replace the following placeholders with your CentOS 7 machine details
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} abdulahad@192.168.181.130 
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ./index.html abdulahad@192.168.181.130:/home/abdulahad/testing-ejm
+
+          # Optional: Add any additional commands needed on your CentOS 7 machine after the file is copied
+          # For example, you might restart a service or execute a script
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} abdulahad@192.168.181.130 'echo "File copied successfully!"'
+
