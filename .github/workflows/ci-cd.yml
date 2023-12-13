@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use Node.js 16
+      - name: Checkout Repository
+        uses: actions/checkout@v2.4.3
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 16
-
-      - name: Checkout Repository
-        uses: actions/checkout@v2
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.6.0
