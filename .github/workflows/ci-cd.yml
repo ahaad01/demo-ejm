@@ -20,7 +20,7 @@ jobs:
 
       - name: Copy index.html to CentOS7 Machine
         run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ./index.html abdulahad@192.168.181.130:/home/abdulahad/demo-ejm
+          scp -o StrictHostKeyChecking=no -i /home/abdulahad/.ssh/id_rsa ./index.html abdulahad@192.168.181.130:/home/abdulahad/demo-ejm
 
           # Optional: Add any additional commands needed on your CentOS 7 machine after the file is copied
           # For example, you might restart a service or execute a script
